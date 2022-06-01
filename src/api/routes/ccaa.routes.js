@@ -1,1 +1,17 @@
 //fichero de rutas de CCAA
+const express = require("express");
+const router = express.Router();
+
+const { isAuth } = require("../../middlewares/auth.middleware");
+
+const {
+  getAllComunidades,
+  getComunidadesByID,
+  createComunidad,
+} = require("../controllers/ccaa.controller");
+
+router.get("/", getAllComunidades);
+router.get("/:id", getComunidadesByID);
+router.post("/", [isAuth], createComunidad);
+
+module.exports = router;
