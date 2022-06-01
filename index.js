@@ -6,8 +6,8 @@ const cloudinary = require("cloudinary").v2;
 
 //Importamos los routers
 
-const CcaaRouter = require("./src/api/routes/animals.routes")
-const CiudadRouter = require("./src/api/routes/continents.routes")
+const CcaaRouter = require("./src/api/routes/ccaa.routes")
+const CiudadRouter = require("./src/api/routes/ciudad.routes")
 
 dotenv.config()
 
