@@ -10,7 +10,7 @@ const CiudadSchema  = new Schema (
        extension: {type: String,required: false},
        escudo: {type: String,required: false},
        bandera: {type: String,required: false},
-       comunidad autonoma: {type: String,required: true},
+       comunidad: {type: String,required: true},
     },
     {timestamps: true}
     );
