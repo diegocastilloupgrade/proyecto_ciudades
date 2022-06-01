@@ -7,7 +7,7 @@ const cloudinary = require("cloudinary").v2;
 //Importamos los routers
 
 const CcaaRouter = require("./src/api/routes/ccaa.routes")
-const CiudadRouter = require("./src/api/routes/ciudad.routes")
+const CiudadesRouter = require("./src/api/routes/ciudades.routes")
 
 dotenv.config()
 
@@ -41,7 +41,7 @@ server.use((req, res, next) => {
 
 
 server.use("/ccaa",CcaaRouter)
-server.use("/ciudad",CiudadRouter)
+server.use("/ciudades",CiudadesRouter)
 
 const PORT = process.env.PORT || 5000;
 
