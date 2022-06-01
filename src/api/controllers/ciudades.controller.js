@@ -32,11 +32,14 @@ const getCityByID = async (req, res, next) => {
 const createCity = async (req, res, next) => {
   try {
     const newCity = new City(req.body);
+    if (req.file){
+      newCity.photo = req.file.path;
+  }
     const createdCity = newCity.save();
     return res.json({
       status: 201,
       message: HTTPSTATUSCODE[201],
-      createdCities: newCity,
+      ciudad: createdCity,
     });
   } catch (error) {
     return next(error);

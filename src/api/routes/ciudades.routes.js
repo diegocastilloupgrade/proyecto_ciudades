@@ -2,6 +2,8 @@
 const express = require("express");
 const router = express.Router();
 
+const upload = require("../../middlewares/file")
+
 const { isAuth } = require("../../middlewares/auth.middleware");
 
 const {
@@ -12,6 +14,6 @@ const {
 
 router.get("/", getAllCities);
 router.get("/:id", getCityByID);
-router.post("/", [isAuth], createCity);
+router.post("/", upload.single("photo"),createCity);
 
 module.exports = router;
