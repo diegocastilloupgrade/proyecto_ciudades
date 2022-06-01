@@ -1,5 +1,5 @@
 //controlador de ciudades
-const City = require("../controllers/ciudades.controller");
+const City = require("../models/ciudad.model");
 const HTTPSTATUSCODE = require("../../utils/httpStatusCode");
 
 const getAllCities = async (req, res, next) => {
