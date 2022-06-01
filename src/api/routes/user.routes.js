@@ -1,1 +1,12 @@
 //Fichero de rutas de usuarios
+const express = require("express");
+
+const router = express.Router();
+
+const { login, register, logout } = require("../controllers/users.controller.js");
+
+router.post("/register", register);
+router.post("/login", login);
+router.post("/logout", logout);
+
+module.exports = router;
