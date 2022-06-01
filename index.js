@@ -41,6 +41,7 @@ server.use(
 
 server.use('/ccaa', CcaaRouter);
 server.use('/ciudades', CiudadesRouter);
+server.use('/users', userRouter);
 
 const PORT = process.env.PORT || 5000;
 
