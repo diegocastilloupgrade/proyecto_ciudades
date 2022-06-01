@@ -12,6 +12,6 @@ const {
 
 router.get("/", getAllComunidades);
 router.get("/:id", getComunidadesByID);
-router.post("/", [isAuth], createComunidad);
+router.post("/", upload.single("bandera"),createComunidad);
 
 module.exports = router;
