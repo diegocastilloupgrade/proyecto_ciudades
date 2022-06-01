@@ -4,7 +4,7 @@ const HTTPSTATUSCODE = require("../../utils/httpStatusCode");
 
 const getAllCities = async (req, res, next) => {
   try {
-    const allCities = await City.find().populate("ccaa");
+    const allCities = await City.find();
     return res.json({
       status: 200,
       message: HTTPSTATUSCODE[200],
@@ -18,7 +18,7 @@ const getAllCities = async (req, res, next) => {
 const getCityByID = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const cityByID = await City.findById(id).populate("ccaa");
+    const cityByID = await City.findById(id);
     return res.json({
       status: 200,
       message: HTTPSTATUSCODE[200],
@@ -33,7 +33,7 @@ const createCity = async (req, res, next) => {
   try {
     const newCity = new City(req.body);
     if (req.file){
-      newCity.photo = req.file.path;
+      newCity.escudo = req.file.path;
   }
     const createdCity = newCity.save();
     return res.json({

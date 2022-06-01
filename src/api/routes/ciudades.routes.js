@@ -14,6 +14,6 @@ const {
 
 router.get("/", getAllCities);
 router.get("/:id", getCityByID);
-router.post("/", upload.single("photo"),createCity);
+router.post("/", upload.single("escudo"),createCity);
 
 module.exports = router;
