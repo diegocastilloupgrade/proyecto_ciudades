@@ -32,6 +32,9 @@ const getAllComunidades= async (req, res, next) => {
   const createComunidad = async (req, res, next) => {
     try {
       const newComunidad = new ccaa(req.body);
+      if (req.file) {
+          newComunidad.bandera = req.file.path;
+      }
       const createdComunidad = newComunidad.save();
       return res.json({
         status: 201,

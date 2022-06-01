@@ -7,7 +7,7 @@ const CcaaSchema  = new Schema (
        name: {type: String,required: true},
        poblacion: {type: String,required: true},
        capital: {type: String,required: true},
-       escudo: {type: String,required: false},
+       //escudo: {type: String,required: false},
        bandera: {type: String,required: false},
        
     },
