@@ -4,15 +4,7 @@ const cors = require('cors');
 const logger = require('morgan');
 const cloudinary = require('cloudinary').v2;
 
-//Importamos los routers
-
-const CcaaRouter = require('./src/api/routes/ccaa.routes');
-const CiudadesRouter = require('./src/api/routes/ciudades.routes');
-
 dotenv.config();
-
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
 
 const { connect } = require('./src/utils/database');
 
@@ -24,6 +16,22 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
+
+
+const server = express();
+//USAMOS MORGAN PARA PODER VER UN LOG DE LAS PETICIONES QUE REALIZAMOS CUANDO ESTEMOS BAJO EL SCRIPT DEV
+server.use(logger('dev'));
+
+const PORT = process.env.PORT || 5000;
+
+//Importamos los routers
+const CcaaRouter = require('./src/api/routes/ccaa.routes');
+const CiudadesRouter = require('./src/api/routes/ciudades.routes');
+const UserRouter = require('./src/api/routes/user.routes');
+
+//RECUPERAMOS LA CLAVE SECRETA DEL DOTENV
+const JWT_SECRET = process.env.JWT_SECRET;
+
 //CONFIGURAMOS LOS HEADERS
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
@@ -32,6 +40,7 @@ server.use((req, res, next) => {
   next();
 });
 
+//CORS
 server.use(
   cors({
     origin: '*',
@@ -39,14 +48,17 @@ server.use(
   })
 );
 
+//CONFIGURAMOS LA CODIFICACION DE EXPRESS PARA RECIBIR INFORMACION EN JSON
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
+//SETEAMOS LA CLAVE SECRETA QUE ME PIDE LA AUTENTICACION (EL LOGIN);
+server.set('secretKey', JWT_SECRET);
+
+//USAMOS LOS ROUTES
 server.use('/ccaa', CcaaRouter);
 server.use('/ciudades', CiudadesRouter);
-server.use('/users', userRouter);
-
-const PORT = process.env.PORT || 5000;
-
-//RECUPERAMOS LA CLAVE SECRETA DEL DOTENV
-const JWT_SECRET = process.env.JWT_SECRET;
+server.use('/users', UserRouter);
 
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
