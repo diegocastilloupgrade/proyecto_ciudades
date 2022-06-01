@@ -1,7 +1,7 @@
 //fichero de rutas de CCAA
 const express = require("express");
 const router = express.Router();
-
+const upload = require("../../middlewares/file")
 const { isAuth } = require("../../middlewares/auth.middleware");
 
 const {
