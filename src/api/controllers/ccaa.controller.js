@@ -39,7 +39,7 @@ const getAllComunidades= async (req, res, next) => {
       return res.json({
         status: 201,
         message: HTTPSTATUSCODE[201],
-        createdComunidad: newComunidad,
+        Comunidad: createdComunidad,
       });
     } catch (error) {
       return next(error);
