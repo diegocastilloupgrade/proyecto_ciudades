@@ -1,6 +1,7 @@
 //controlador de ccaa
 const ccaa = require("../models/ccaa.model");
 const HTTPSTATUSCODE = require("../../utils/httpStatusCode");
+const Ccaa = require("../models/ccaa.model");
 
 const getAllComunidades= async (req, res, next) => {
     try {
@@ -46,4 +47,23 @@ const getAllComunidades= async (req, res, next) => {
     }
   };
   
-  module.exports = { getAllComunidades, getComunidadesByID, createComunidad };
+
+  const deleComunidad = async (req, res,next) => {
+    try {
+      const { id } = req.params;
+      const deleteComunidad = await Comunidad.findByIdAndDelete(id);
+      return res.json({
+        status: 200,
+        message: HTTPSTATUSCODE[200],
+        comunidad: deleteComunidad,
+    })
+    } catch (error) {
+      return next(error)
+    }
+  
+  };
+
+
+
+  
+  module.exports = { getAllComunidades, getComunidadesByID, createComunidad,deleComunidad };

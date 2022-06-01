@@ -1,6 +1,7 @@
 //controlador de ciudades
 const City = require("../models/ciudad.model");
 const HTTPSTATUSCODE = require("../../utils/httpStatusCode");
+const Ciudad = require("../models/ciudad.model");
 
 const getAllCities = async (req, res, next) => {
   try {
@@ -46,4 +47,21 @@ const createCity = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllCities, getCityByID, createCity };
+
+
+const deleCiudad = async (req, res,next) => {
+  try {
+    const { id } = req.params;
+    const deleteCiudad = await Ciudad.findByIdAndDelete(id);
+    return res.json({
+      status: 200,
+      message: HTTPSTATUSCODE[200],
+      ciudad: deleteCiudad,
+  })
+  } catch (error) {
+    return next(error)
+  }
+
+};
+
+module.exports = { getAllCities, getCityByID, createCity,deleCiudad };
