@@ -29,13 +29,23 @@ const getCityByID = async (req, res, next) => {
     return next(error);
   }
 };
+const getCityByName = async (req, res, next) => {
+  try {
+    const name = req.params.name;
+    const cityByName = await City.find({ name: name });
+    return res.status(200).json(cityByName);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 const createCity = async (req, res, next) => {
   try {
     const newCity = new City(req.body);
-    if (req.file){
+    if (req.file) {
       newCity.escudo = req.file.path;
-  }
+      newCity.bandera = req.file.path;
+    }
     const createdCity = newCity.save();
     return res.json({
       status: 201,
@@ -46,8 +56,6 @@ const createCity = async (req, res, next) => {
     return next(error);
   }
 };
-
-
 
 const deleCiudad = async (req, res,next) => {
   try {
@@ -64,4 +72,4 @@ const deleCiudad = async (req, res,next) => {
 
 };
 
-module.exports = { getAllCities, getCityByID, createCity,deleCiudad };
+module.exports = { getAllCities, getCityByID, getCityByName, createCity,deleCiudad };
