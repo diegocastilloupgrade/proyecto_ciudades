@@ -9,11 +9,15 @@ const { isAuth } = require("../../middlewares/auth.middleware");
 const {
     getAllCities,
     getCityByID,
-    createCity
+    createCity,
+    deleCiudad
 } = require("../controllers/ciudades.controller");
+// 
+
 
 router.get("/", getAllCities);
 router.get("/:id", getCityByID);
 router.post("/", upload.single("escudo"),createCity);
+router.delete("/:id",deleCiudad)
 
 module.exports = router;
