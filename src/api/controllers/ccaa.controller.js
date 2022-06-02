@@ -1,7 +1,7 @@
 //controlador de ccaa
 const ccaa = require("../models/ccaa.model");
 const HTTPSTATUSCODE = require("../../utils/httpStatusCode");
-const Ccaa = require("../models/ccaa.model");
+// const Ccaa = require("../models/ccaa.model");
 
 const getAllComunidades= async (req, res, next) => {
     try {
