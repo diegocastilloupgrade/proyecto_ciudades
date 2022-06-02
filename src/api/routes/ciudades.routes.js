@@ -1,19 +1,28 @@
 //Fichero de rutas de ciudades
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-
-const upload = require("../../middlewares/file")
-
-const { isAuth } = require("../../middlewares/auth.middleware");
-
+const upload = require('../../middlewares/file');
+const { isAuth } = require('../../middlewares/auth.middleware');
 const {
-    getAllCities,
-    getCityByID,
-    createCity
-} = require("../controllers/ciudades.controller");
+  getAllCities,
+  getCityByID,
+  getCityByName,
+  createCity,
+} = require('../controllers/ciudades.controller');
 
-router.get("/", getAllCities);
-router.get("/:id", getCityByID);
-router.post("/", upload.single("escudo"),createCity);
-
+router.get('/', getAllCities);
+router.get('/:id', getCityByID);
+router.get('/ciudad/:name', getCityByName);
+router.post('/', upload.single("escudo"),createCity);
+//router.post("/", upload.single(["escudo","bandera"]),createCity);
+/*
+router.post('/', upload.single('escudo'), upload.single('bandera'), createCity);
+router.post(
+  '/',
+  upload.fields([
+    { name: 'escudo', maxCount: 1 },
+    { name: 'bandera', maxCount: 1 },
+  ])
+);
+*/
 module.exports = router;
